@@ -1,0 +1,32 @@
+*{
+    margin:0px;
+    padding: 0px;
+}
+
+#nav-bar{
+    margin: 0px;
+    height: 50px;
+    width: auto;
+    background-color: antiquewhite;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+ul {
+    list-style: none;
+}
+
+ul li a{
+    text-decoration: none;
+    color: black;
+    margin: 4px;
+    padding: 2px;
+}
+
+.left-end{
+    display: flex; 
+}
+
