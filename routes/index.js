@@ -9,7 +9,8 @@ const homeController = require('../controllers/home_controller');
 router.get('/',homeController.home);
 
 // setting up the other routes
-router.get('/user',require('./user'));
+router.use('/users',require('./user'));
+
 
 
 
