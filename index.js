@@ -15,8 +15,8 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
-//using google-O-Auth for authentication
-const googleStrategy = require('./config/passport-google-oauth-strategy');
+// to use the google strategy
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
 
 
 
