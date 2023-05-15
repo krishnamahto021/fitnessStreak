@@ -5,7 +5,7 @@ const router = express.Router();
 const userController = require('../controllers/user_controller');
 const passport = require('passport');
 
-//router.get('/profile',userController.profile);
+router.get('/profile',userController.profile);
 router.get('/sign-up',userController.signUp);
 router.get('/sign-in',userController.signIn);
 
@@ -18,7 +18,7 @@ router.post('/create-session',passport.authenticate('local',{failureRedirect:'/u
 
 // to use google authentication
 router.get('/auth/google',passport.authenticate('google',{scope:['profile','email']}));
-router.get('/auth/google/callback',passport.authenticate('google',{failureRedirect:'/users/sign-in'},userController.createSession));
+router.get('/auth/google/callback',passport.authenticate('google',{failureRedirect:'/users/sign-in'}),userController.createSession);
 
 
 

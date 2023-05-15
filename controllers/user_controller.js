@@ -21,7 +21,7 @@ module.exports.signIn = function(req,res){
 
     // if the user is already signed in redirect to profile page
     if(req.isAuthenticated()){
-        return res.redirec('/user/profile');
+        return res.redirect('/users/profile');
     }
     return res.render('user_sign_in',{
         title:'Sign In'
@@ -32,7 +32,7 @@ module.exports.signIn = function(req,res){
 module.exports.signUp = function(req,res){    
     // if the user is already signed in redirect to profile page
     if(req.isAuthenticated()){
-        return res.redirec('/user/profile');
+        return res.redirect('/users/profile');
     }
     return res.render('user_sign_up',{
         title:'Sign Up',
@@ -51,7 +51,7 @@ module.exports.create = async function(req,res){
 
         if(!user){ // user doesnot exist
             const newUser = await User.create(req.body);
-            return res.redirect('/user/sign-in');
+            return res.redirect('/users/sign-in');
         }else{
             return res.redirect('back');
         }
@@ -64,5 +64,6 @@ module.exports.create = async function(req,res){
 
 // to fetch data from sign in from
 module.exports.createSession = function(req,res){
+    req.flash('success','Logged in Successfully!!');
     return res.redirect('/');
 }
