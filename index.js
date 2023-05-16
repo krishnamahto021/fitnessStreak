@@ -4,6 +4,7 @@ const app = express();
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
+const mongoStore = require('connect-mongo');
 
 // require files for connect-flash
 const connectFlash = require('connect-flash');
@@ -45,8 +46,19 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: (1000 * 60 * 100)
+        maxAge: (1000 * 80 * 100)
+    },
+    store:new mongoStore({
+        mongoUrl:'mongodb://127.0.0.1/fitness_streak_db',
+    },
+    {
+        mongooseConnection:db,
+        autoRemove:'disabled'
+    },function(err){
+        console.log(err||'successfully added mongo store')
     }
+    
+    )
 }));
 
 
