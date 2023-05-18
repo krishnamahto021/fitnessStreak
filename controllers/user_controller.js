@@ -1,6 +1,9 @@
 const User = require("../models/user");
 const path = require('path');
 const fs = require('fs');
+const userSignupMailer = require('../mailers/sign_up_mailer');
+const queue = require('../config/kue');
+const signUpEmailWorker = require('../workers/sign_up_email_worker');
 
 //render the user profile page
 module.exports.profile = async function (req, res) {
@@ -49,11 +52,28 @@ module.exports.create = async function (req, res) {
         const user = await User.findOne({
             email: req.body.email
         });
-
         if (!user) { // user doesnot exist
             const newUser = await User.create(req.body);
+            // userSignupMailer.signUp(newUser);  to send mail to user once he sign in
+
+            let job = queue.create('emails',newUser).save(function(err){
+                if(err){
+                    console.log('error in KUE',err);
+                }
+                console.log('job enqueued',job.id);
+            });
+
             return res.redirect('/users/sign-in');
         } else {
+            // userSignupMailer.signUp(user);  to send mail to user once he sign in
+
+            let job = queue.create('emails',user).save(function(err){
+                if(err){
+                    console.log('error in KUE',err);
+                }
+                console.log('job enqueued',job.id);
+            });
+
             return res.redirect('back');
         }
 

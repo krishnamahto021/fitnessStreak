@@ -37,6 +37,9 @@ app.use(cookieParser());
 
 app.use(express.static('./assets'));
 
+// for viewing uploaded file
+app.use('/uploads',express.static(__dirname + '/uploads'));
+
 app.use(expressLayouts);
 
 app.use(session({
