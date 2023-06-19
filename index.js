@@ -29,7 +29,7 @@ app.set('layout extractScripts', true);
 
 // set up the view engine
 app.set('view engine', 'ejs');
-app.set('views', './views');
+app.set('views', './views'); 
 
 // setup the socket.io for chatting
 const chatServer = require('http').Server(app);
